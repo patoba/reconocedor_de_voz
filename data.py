@@ -64,11 +64,13 @@ if __name__ == '__main__':
 
     # crear carpeta salida
     if not os.path.exists(output_dir):
+        print("creando carpeta salida")
         create_dir = f"mkdir {output_dir}"
         os.system(create_dir)
 
     # crear carpeta log
     if not os.path.exists("log/"):
+        print("creando carpeta log")
         create_dir = f"mkdir {output_dir}"
         os.system(create_dir)
 
@@ -77,6 +79,7 @@ if __name__ == '__main__':
 
     # crear archivo de registros correctos
     if not os.path.exists(file_write_name_files_correct):
+        print("creando archivo con batches correctos")
         crear_archivo(file_write_name_files_correct)
 
     sleep(5)
