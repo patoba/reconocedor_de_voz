@@ -1,10 +1,10 @@
 from math import ceil
 import os
 from time import time, sleep
-    
+
 def escribir_archivo(file_name, text):
     with open(file_name, 'a') as f:
-        f.write(text + '\n') 
+        f.write(text + '\n')
 
 def escribir(text, file_name):
     print(text)
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     output_dir = f"{file_name[:-10]}/es/clips_wav"
     input_dir = f"{file_name[:-10]}/es/clips"
     log_folder = "log/"
-    
+
     # descomprimir
     if not os.path.exists(input_dir):
         print("descomprimiendo")
@@ -66,9 +66,9 @@ if __name__ == '__main__':
         os.system(create_dir)
 
     # crear carpeta log
-    if not os.path.exists("log/"):
+    if not os.path.exists(log_folder):
         print("creando carpeta log")
-        create_dir = f"mkdir {output_dir}"
+        create_dir = f"mkdir {log_folder}"
         os.system(create_dir)
 
     intento = min(0, len(obtener_archivos_de_ubicacion(log_folder)) - 1)
