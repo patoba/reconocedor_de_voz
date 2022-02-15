@@ -52,9 +52,6 @@ if __name__ == '__main__':
     output_dir = f"{file_name[:-10]}/es/clips_wav"
     input_dir = f"{file_name[:-10]}/es/clips"
     log_folder = "log/"
-    intento = min(0, len(obtener_archivos_de_ubicacion(log_folder)) - 1)
-    file_write_name =  f"{log_folder}registro_{str(intento)}.txt" 
-    file_write_name_files_correct = f"{log_folder}/completos.txt"
     
     # descomprimir
     if not os.path.exists(input_dir):
@@ -73,6 +70,10 @@ if __name__ == '__main__':
         print("creando carpeta log")
         create_dir = f"mkdir {output_dir}"
         os.system(create_dir)
+
+    intento = min(0, len(obtener_archivos_de_ubicacion(log_folder)) - 1)
+    file_write_name =  f"{log_folder}registro_{str(intento)}.txt" 
+    file_write_name_files_correct = f"{log_folder}/completos.txt"
 
     # crear historico
     crear_archivo(file_write_name)
