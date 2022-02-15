@@ -71,7 +71,7 @@ if __name__ == '__main__':
         create_dir = f"mkdir {log_folder}"
         os.system(create_dir)
 
-    intento = min(0, len(obtener_archivos_de_ubicacion(log_folder)) - 1)
+    intento = max(0, len(obtener_archivos_de_ubicacion(log_folder)) - 1)
     file_write_name =  f"{log_folder}registro_{str(intento)}.txt" 
     file_write_name_files_correct = f"{log_folder}/completos.txt"
 
