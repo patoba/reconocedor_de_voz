@@ -13,7 +13,10 @@ def escribir(text, file_name):
 def procesar_archivos(archivos_uris):
     for f in archivos_uris:
         ffmep = f'ffmpeg -i "{f}" -ar 16000 {output_dir}/$(basename "{f}" .mp3).wav'
-        os.system(ffmep)
+        if os.system(ffmep) != 0:
+            return False
+        borrar = f'rm -f "{f}"'
+        os.system(borrar)
     return True
 
 def procesar_batches(archivos, archivo_log, archivo_log_correctos,
