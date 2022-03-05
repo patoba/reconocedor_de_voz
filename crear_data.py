@@ -10,17 +10,19 @@ def escribir(text, file_name):
     print(text)
     escribir_archivo(file_name, text)
 
-def procesar_archivos(archivos_uris):
+def procesar_archivos(archivos_uris, borrar_data):
     for f in archivos_uris:
         ffmep = f'ffmpeg -i "{f}" -ar 16000 {output_dir}/$(basename "{f}" .mp3).wav'
         if os.system(ffmep) != 0:
             return False
-        borrar = f'rm -f "{f}"'
-        os.system(borrar)
+        if borrar_data:
+            borrar = f'rm -f "{f}"'
+            os.system(borrar)
     return True
 
 def procesar_batches(archivos, archivo_log, archivo_log_correctos,
-                    batch_size = 100, ignorar_batches = {}):
+                    batch_size = 100, ignorar_batches = {},
+                    borrar_data = True):
     tiempo_inicial = time()
     total_de_archivos = len(archivos)  # 528502
     n_iteraciones = int(ceil(total_de_archivos / batch_size))
@@ -32,7 +34,7 @@ def procesar_batches(archivos, archivo_log, archivo_log_correctos,
         else:
             sub_archivos = archivos[i * batch_size:(i + 1) * batch_size]
             s = time() - tiempo_inicial
-            if procesar_archivos(sub_archivos):
+            if procesar_archivos(sub_archivos, borrar_data):
                 escribir(f"batch {i} exitoso - {s} seg", archivo_log)
                 batch_correctos.append(i)
                 escribir(str(i), archivo_log_correctos)
@@ -94,4 +96,4 @@ if __name__ == '__main__':
 
     files = obtener_archivos_de_ubicacion(input_dir) 
     procesar_batches(files, file_write_name, file_write_name_files_correct,
-                        ignorar_batches = batches_completos)
+                     ignorar_batches = batches_completos, borrar_data = False)
