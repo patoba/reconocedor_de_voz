@@ -12,4 +12,5 @@ pip install Cython
 pip install -r requirements.txt
 
 user=$(whoami)
-echo "source ASR/bin/activate" >> /home/$user/.bashrc
+dir_actual=$(pwd)
+echo "source $dir_actual/ASR/bin/activate" >> /home/$user/.bashrc
