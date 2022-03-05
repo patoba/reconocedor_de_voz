@@ -9,7 +9,7 @@ pip install --upgrade pip
 pip install wheel
 pip install Cython
 
-pip install -r requirements.txt
+# pip install -r requirements.txt
 
 user=$(whoami)
 dir_actual=$(pwd)
