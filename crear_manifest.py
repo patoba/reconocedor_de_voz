@@ -1,32 +1,60 @@
 import os
 import librosa.display
 import json
+import sys
 
 def build_manifest(data_dir, transcripts_path, manifest_path, wav_path):
     with open(transcripts_path, 'r') as fin:
+        next(fin)
         with open(manifest_path, 'w') as fout:
-            for line in fin:
-                transcript = line[: line.find('(')-1].lower()
-                transcript = transcript.replace('<s>', '').replace('</s>', '')
-                transcript = transcript.strip()
-                file_id = line[line.find('(')+1 : -2]  
+            for linea in fin:
+                separacion = linea.split("\t")
+                
+                file_nombre = separacion[1].replace(".mp3", "")  
+
+                transcript = separacion[2]
+
                 audio_path = os.path.join(
                     data_dir, wav_path,
-                    file_id[file_id.find('-')+1 : file_id.rfind('-')],
-                    file_id + '.wav')
-
-                duration = librosa.core.get_duration(filename=audio_path)
+                    file_nombre + '.wav')
+                
+                duracion = librosa.core.get_duration(filename=audio_path)
 
                 metadata = {
                     "audio_filepath": audio_path,
-                    "duration": duration,
+                    "duration": duracion,
                     "text": transcript
                 }
+
                 json.dump(metadata, fout)
                 fout.write('\n')
 
 if __name__ == '__main__':
-    data_dir = "/mnt/working/ASR/data/"
-    transcripts_path = data_dir +  "transcripts.txt"
-    manifest_path = data_dir + "manifest.txt"
-    wav_path = "archivos_wav/"
+    name = str(sys.argv[1])
+
+    checkpoints_folder = "checkpoints/"
+
+    data_dir = "./data/"
+    transcripts_folder = data_dir + "transcripts/"
+    manifest_folder = data_dir + "manifests/"
+
+    if not os.path.exists(transcripts_folder):
+        print(f"creando carpeta {transcripts_folder}")
+        create_dir = f"mkdir {transcripts_folder}"
+        os.system(create_dir)
+
+    if not os.path.exists(manifest_folder):
+        print(f"creando carpeta {manifest_folder}")
+        create_dir = f"mkdir {manifest_folder}"
+        os.system(create_dir)
+
+    if not os.path.exists(checkpoints_folder):
+        print("creando carpeta manifest")
+        create_dir = f"mkdir {checkpoints_folder}"
+        os.system(create_dir)
+
+    transcripts_path = transcripts_folder + name
+    manifest_path = manifest_folder + name.replace(".tsv", ".json")
+    wav_path = "clips_wav/"
+
+    build_manifest(data_dir, transcripts_path, manifest_path, wav_path)

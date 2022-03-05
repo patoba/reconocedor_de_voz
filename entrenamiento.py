@@ -4,7 +4,11 @@ import nemo.collections.asr as nemo_asr
 from omegaconf import DictConfig
 from copy import deepcopy
 
-config_path = './quartznet_15x5.yaml'
+data_dir = "./data/"
+config_path = data_dir + 'quartznet_15x5.yaml'
+manifests = data_dir + "manifests/"
+train_manifest = manifests + "train.json"
+test_manifest = manifests + "test.json"
 
 yaml = YAML(typ='safe')
 with open(config_path) as f:
