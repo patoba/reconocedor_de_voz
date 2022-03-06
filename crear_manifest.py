@@ -10,7 +10,7 @@ def build_manifest(data_dir, transcripts_path, manifest_path, wav_path):
             for linea in fin:
                 separacion = linea.split("\t")
 
-                file_nombre = separacion[1].replace(".mp3", "")  
+                file_nombre = separacion[1].replace(".mp3", "")
 
                 transcript = separacion[2]
 

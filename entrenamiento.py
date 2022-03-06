@@ -39,8 +39,9 @@ quartznet.setup_training_data(train_data_config=params['model']['train_ds'])
 
 quartznet.setup_validation_data(val_data_config=params['model']['validation_ds'])
 
-trainer = pl.Trainer(gpus=1, max_epochs=1, # 50 epocas min 
-                     default_root_dir = "./checkpoints")
+trainer = pl.Trainer(gpus=1, max_epochs=1, # 50 epocas min
+                     default_root_dir = "./checkpoints"
+                     )
 
 trainer.fit(quartznet)
 

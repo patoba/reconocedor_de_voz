@@ -1,4 +1,4 @@
-sudo apt-get update && sudo apt-get install -y libfuzzy-dev libsndfile1 ffmpeg python3.7 python3.7-venv
+sudo apt-get update && sudo apt-get install -y screen libfuzzy-dev libsndfile1 ffmpeg python3.7 python3.7-venv libpython3.7-dev
 
 /usr/bin/python3.7 -m pip install virtualenv
 /usr/bin/python3.7 -m venv ASR
