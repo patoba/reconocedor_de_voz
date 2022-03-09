@@ -39,7 +39,7 @@ quartznet.setup_training_data(train_data_config=params['model']['train_ds'])
 
 quartznet.setup_validation_data(val_data_config=params['model']['validation_ds'])
 
-trainer = pl.Trainer(gpus=1, max_epochs=2, # 50 epocas min
+trainer = pl.Trainer(gpus=1, max_epochs=10, # 50 epocas min
                      default_root_dir = "./checkpoints"
                      )
 
