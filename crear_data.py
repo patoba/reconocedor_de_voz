@@ -77,7 +77,7 @@ if __name__ == '__main__':
         os.system(create_dir)
 
     intento = max(0, len(obtener_archivos_de_ubicacion(log_folder)) - 1)
-    file_write_name =  f"{log_folder}registro_{str(intento)}.txt" 
+    file_write_name =  f"{log_folder}registro_{str(intento)}.txt"
     file_write_name_files_correct = f"{log_folder}/completos.txt"
 
     # crear historico
@@ -94,6 +94,6 @@ if __name__ == '__main__':
     batches_completos = open(file_write_name_files_correct, "r").readlines()
     batches_completos = [int(batch.replace("/n", "")) for batch in batches_completos]
 
-    files = obtener_archivos_de_ubicacion(input_dir) 
+    files = obtener_archivos_de_ubicacion(input_dir)
     procesar_batches(files, file_write_name, file_write_name_files_correct,
                      ignorar_batches = batches_completos, borrar_data = False)

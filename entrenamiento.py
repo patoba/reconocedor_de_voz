@@ -8,7 +8,7 @@ data_dir = "./data/"
 config_path = data_dir + 'quartznet_15x5.yaml'
 manifests = data_dir + "manifests/"
 train_manifest = manifests + "train.json"
-test_manifest = manifests + "test.json"
+validation_manifest = manifests + "validation.json"
 
 yaml = YAML(typ='safe')
 with open(config_path) as f:
@@ -18,7 +18,7 @@ new_opt = deepcopy(params['model']['optim'])
 new_opt['lr'] = 0.001
 
 params['model']['train_ds']['manifest_filepath'] = train_manifest
-params['model']['validation_ds']['manifest_filepath'] = test_manifest
+params['model']['validation_ds']['manifest_filepath'] = validation_manifest
 
 quartznet = nemo_asr.models.EncDecCTCModel.from_pretrained(model_name="QuartzNet15x5Base-En")
 
@@ -39,10 +39,11 @@ quartznet.setup_training_data(train_data_config=params['model']['train_ds'])
 
 quartznet.setup_validation_data(val_data_config=params['model']['validation_ds'])
 
-trainer = pl.Trainer(gpus=1, max_epochs=10, # 50 epocas min
+trainer = pl.Trainer(gpus=1, max_epochs=2, # 50 epocas min
                      default_root_dir = "./checkpoints"
                      )
 
 trainer.fit(quartznet)
 
 trainer.save_checkpoint("./checkpoints/ultimo.ckpt")
+quartznet.save_to("./checkpoints/modelo_final.nemo")
