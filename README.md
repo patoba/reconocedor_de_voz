@@ -2,7 +2,7 @@
 
 ## Data
 
-El dataset usado para este proceso es el Common Voice de mozilla que puede ser descargado desde [aqui](https://commonvoice.mozilla.org/es/datasets). Pesa alrededor de 20 gb y es necesario descomprimirlo. Por defecto viene en mp3 hay que realizar una conversion a formato wav a una tasa de 16 kbps para que sea compatible con nemo. 
+El dataset usado para este proceso es el Common Voice de mozilla que puede ser descargado desde [aqui](https://commonvoice.mozilla.org/es/datasets). Pesa alrededor de 20 gb y es necesario descomprimirlo. Por defecto viene en mp3 hay que realizar una conversion a formato wav a una tasa de 16 kbps para que sea compatible con nemo. El peso total del dataset ya descomprimido teniendo tanto los wav como los mp3 es alrededor de 130 gb.
 
 ## Configuracion
 
